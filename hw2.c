@@ -47,6 +47,7 @@ void personalScreen() {
 bool checkPassword(){ //檢查密碼是否正確
      char password[] = "2024"; //設定預設密碼
      char inputPassword[5]; //設定輸入密碼
+     int passwordAttempts=3; //設定嘗試次數
      int maxAttempts = 3; //設定最大嘗試次數
      for (int i = 0; i < maxAttempts; i++)//驗證密碼
 	 { 
