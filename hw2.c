@@ -94,50 +94,50 @@ void drawRightTeiangle() { //畫直角三角形
         }
     } while (1);
 
-    printf("三角形:\n");
-    if (islower(ch))
+    printf("三角形:\n");//輸出三角形
+    if (islower(ch))//如果輸入的字元是小寫字母
 	 {
-        n = ch - 'a' + 1;
+        n = ch - 'a' + 1;//計算小寫字元與 'a' 的相對位置，並加 1
     } 
-	else if (isupper(ch)) 
+	else if (isupper(ch)) //如果輸入的字元是大寫字母
 	{
-        n = ch - 'A' + 1;
+        n = ch - 'A' + 1;//計算大寫字元與 'A' 的相對位置，並加 1
     }
 
     for (i = 1; i <= n; i++) { // 打印空格  
         for (j = 1; j <= n - i; j++) {
-            printf(" ");
+            printf(" ");//在每一行的起始位置打印空格，用於形成直角三角形的空白部分，數量隨著行數增加而減少
+        
         }
 
         for (j = 1; j <= i; j++) { // 打印字元
-            if (islower(ch))
-                printf("%s", ch - (i - j));
-            else if (isupper(ch))
-                printf("%s", toupper(ch) - (i - j));
+            if (islower(ch))//如果輸入的字元是小寫字母
+                printf("%s", ch - (i - j));//以遞減方式打印字元，形成直角三角形
+            else if (isupper(ch))//如果輸入的字元是大寫字母
+                printf("%s", toupper(ch) - (i - j));//以遞減方式打印字元，形成直角三角形
         }
 
-        printf("\n");
+        printf("\n");//換行，進入下一行打印
     }
 
     printf("按下任意鍵返回主選單..."); //返回主選單
-    getchar();
-    clearScreen();
-}
-
+    getch();//等待用戶輸入任意鍵
+    clearScreen();// 清空螢幕
+    
 void multiplication_table() { //乘法表
-    int num;
-    int i;j;
+    int num;//輸入數字 
+    int i,j;//迴圈索引變數
     
     do {
-        printf("請輸入一個1到9之間的數字："); //輸入數字及範圍錯誤反應
-        flush(stdin); //清空緩衝區
-        scanf("%d", &num);
+        printf("請輸入一個1到9之間的數字："); //輸入一個1到9之間的數字
+        fflush(stdin); //清空緩衝區
+        scanf("%d", &num);//讀取用戶輸入的數字
 
-        if (num >= 1 && num >= 9) {
+        if (num >= 1 && num <= 9) { //如果輸入在1到9之間
             break; //脫離迴圈
         } else {
-            clearScreen();
-            printf("輸入錯誤,請輸入1到9之間的數字\n\a");
+            clearScreen();//清空螢幕
+            printf("輸入錯誤,請輸入1到9之間的數字\n\a");//提示輸入錯誤，並要求重新輸入
         }
     } while (1);
 
