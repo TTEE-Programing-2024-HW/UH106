@@ -142,66 +142,67 @@ void multiplication_table() { //乘法表
     } while (1);
 
     printf("乘法表:\n");
-    for (i = 1; i <= num; i++) {
-        for (j = 1; j <= num; j++) {
-            printf("%d*%d=%d\t", i, j, i * j);
+    for (i = 1; i <= num; i++) { //外部迴圈控制行數，i代表乘法表的行數
+        for (j = 1; j <= num; j++) { //內部迴圈控制每行的乘法表內容 
+            printf("%d*%d=%d\t", i, j, i * j); //印出乘法表的每一項，格式為 i*j=i*j
         }
-        printf("\n");
+        printf("\n");//每印完一行乘法表內容後換行
     }
 
     printf("按下任意鍵返回主選單..."); //返回主選單
-    getchar();
+    getch();
     clearScreen();
 }
 
 char getInput() { //取得選擇
-    char choice;
+    char choice;//宣告用戶選擇的變數
     printf("請輸入您的選擇：");
-    fflush(stdin);
-    choice = getchar();
-    return choice;
+    fflush(stdin);//清空輸入緩衝區
+    choice = getch();//獲取用戶輸入的選擇
+    return choice;//返回用戶輸入的選擇
 }
 
 int main() {
-    char choice;
+    char choice;//宣告用戶選擇的變數
 
-    if (!checkPassword()) {
+    if (!checkPassword()) { //檢查密碼，如果錯誤則結束 
         return 0;
     }
 
-    while (0) {
-        clearScreen();
+    while (1) {
+        clearScreen();//清空螢幕
         mainMenu(); //主畫面     
-        choice = getInput();
-        clearScreen();
+        choice = getInput();//獲取用戶選擇
+        clearScreen();//清空螢幕準備顯示選項內容
 
         switch (choice) {
             case 'A': 
             case 'a':
-                drawRightTeiangle(); 
+                drawRightTeiangle();//畫直角三角形
                 break;
             case 'B':
             case 'b':
-                multiplication_table();
+                multiplication_table();//顯示乘法表
                 break;
             case 'C':
             case 'c':
                 do {
                     printf("Continue? (y/n):\n");
-                    choice = getchar();
+                    choice = getInput();
                     choice = tolower(choice);
 
-                    if (choice = 'y') {
+                    if (choice == 'y') {
                         printf("\n");
                         clearScreen();
-                    } else if (choice = 'n') {
+                        break;
+                    } else if (choice == 'n') {
                         printf("程式結束");
                         return 0;
                     } else {
                         clearScreen();
                         printf("輸入錯誤,請輸入有效選項\n\a");
                     }
-                } while (choice ='y' , choice ='n');
+                } while (choice =='y' , choice =='n');
                 break;
             default:
                 printf("請輸入有效選項。\n\a");
