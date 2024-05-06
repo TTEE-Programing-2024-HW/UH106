@@ -82,7 +82,7 @@ void drawRightTeiangle() { //畫直角三角形
     int n;//用於存儲三角形的行數
 
     do {
-        printf("請輸入一個字串（a到n之間）："); //提示用戶輸入一個字符，並指定範圍為a到n之間 
+        printf("請輸入一個字元（a到n之間）："); //提示用戶輸入一個字符，並指定範圍為a到n之間 
         fflush(stdin); //清空緩衝區
         scanf("%c", &ch);//讀取用戶輸入的字符
         
