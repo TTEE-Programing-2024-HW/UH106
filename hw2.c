@@ -1,20 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <conio.h>
-#include <stdbool.h>
-#include <string.h>
-#include <ctype.h>
-#include <unistd.h>
+#include <stdio.h>//標準輸入輸出函式庫
+#include <stdlib.h>//標準函式庫
+#include <conio.h>//輸入輸出函式的定義
+#include <stdbool.h>//定義 true 和 false
+#include <string.h>//定義strcmp()、strcpy()字串處理函式
+#include <ctype.h>//義toupper()、tolower()字符處理函式
+#include <unistd.h>//定義sleep()操作系統服務的函式
 
-void cleanScreen();
-void personalScreen();
-void boolean checkPassword();
-void mainMenu();
-void drawRightTeiangle();
-void multiplication_table();
-char getInput();
+void cleanScreen(); //清理螢幕
+void personalScreen();//個人風格畫面
+void boolean checkPassword();//檢查密碼正確
+void mainMenu();//主畫面
+void drawRightTeiangle(); //畫直角三角形
+void multiplication_table();//乘法表
+char getInput();//取得選擇
 
-void clearScreen() 
+void clearScreen() //清理螢幕
 {     
     system("cls");      
 } 
@@ -44,14 +44,17 @@ void personalScreen() {
     printf("****************************************************************************\n");
 }
 
-void boolean checkPassword(){ // 檢查密碼是否正確
+void boolean checkPassword(){ //檢查密碼是否正確
      char password[] = "2024"; //設定預設密碼
-     char inputPassword[5]; // 設定輸入密碼
-     for (int i = 1; i < 3; i++) { 
-        clearScreen();
-        personalScreen(); 
+     char inputPassword[5]; //設定輸入密碼
+     int passwordAttempts=3; //設定嘗試次數
+     int maxAttempts = 3; //設定最大嘗試次數
+     for (int i = 0; i < maxAttempts; i++)//驗證密碼
+	 { 
+        clearScreen();//清理螢幕
+        personalScreen(); //顯示個人風格畫面
         printf("請輸入四位數字密碼（2024）:");
-        fgets(inputPassword, sizeof(inputPassword), stdin);
+        fgets(inputPassword, sizeof(inputPassword), stdin);//使用 fgets 從標準輸入(stdin)讀取使用者輸入的密碼，並存儲在 inputPassword 中
 
         if (strcmp(inputPassword, password) == 0) {
             return true;            
