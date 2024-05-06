@@ -202,7 +202,7 @@ int main() {
                         clearScreen();
                         printf("輸入錯誤,請輸入有效選項\n\a");
                     }
-                } while (choice =='y' , choice =='n');
+                } while (choice =='y' || choice =='n');
                 break;
             default:
                 printf("請輸入有效選項。\n\a");
