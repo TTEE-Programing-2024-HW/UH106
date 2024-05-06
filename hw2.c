@@ -64,6 +64,7 @@ bool checkPassword(){ //檢查密碼是否正確
             printf("密碼錯誤!請重新輸入（剩餘%d次機會）\n", maxAttempts - i - 1);//提示密碼錯誤並告知使用者剩餘輸入次數
         }
     }
+     
     printf("已連續輸入錯誤三次,程式即將結束\a\n");
 	return false; //結束程式
 }
