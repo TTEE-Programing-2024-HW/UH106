@@ -49,8 +49,9 @@ bool checkPassword(){ //檢查密碼是否正確
      char inputPassword[5]; //設定輸入密碼
      int passwordAttempts=3; //設定嘗試次數
      int maxAttempts = 3; //設定最大嘗試次數
-     for (int i = 0; i < maxAttempts; i++)//驗證密碼
-	 { 
+     int i;
+     for (i = 0; i < maxAttempts; i++) { //驗證密碼
+	 
         clearScreen();//清理螢幕
         personalScreen(); //顯示個人風格畫面
         printf("請輸入四位數字密碼（2024）:");
