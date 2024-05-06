@@ -6,7 +6,7 @@
 #include <ctype.h>//義toupper()、tolower()字符處理函式
 #include <unistd.h>//定義sleep()操作系統服務的函式
 
-void cleanScreen(); //清理螢幕
+void clearScreen(); //清理螢幕
 void personalScreen();//個人風格畫面
 bool checkPassword();//檢查密碼正確
 void mainMenu();//主畫面
@@ -187,30 +187,30 @@ int main() {
             case 'C':
             case 'c':
                 do {
-                    printf("Continue? (y/n):\n");
-                    choice = getInput();
-                    choice = tolower(choice);
+                    printf("Continue? (y/n):\n");//提示是否繼續
+                    choice = getInput();//獲取選擇
+                    choice = tolower(choice);//將選擇轉換為小寫字母
 
-                    if (choice == 'y') {
+                    if (choice == 'y') { //如果選擇繼續
                         printf("\n");
-                        clearScreen();
-                        break;
-                    } else if (choice == 'n') {
-                        printf("程式結束");
-                        return 0;
-                    } else {
-                        clearScreen();
-                        printf("輸入錯誤,請輸入有效選項\n\a");
+                        clearScreen();//清空螢幕
+                        break;//跳出循環，返回主選單
+                    } else if (choice == 'n') { //如果選擇結束
+                        printf("程式結束"); 
+                        return 0;//結束程式
+                    } else { //如果用戶輸入了無效的選項
+                        clearScreen();//清空螢幕
+                        printf("輸入錯誤,請輸入有效選項\n\a");//提示輸入無效
                     }
-                } while (choice =='y' || choice =='n');
-                break;
+                } while (choice =='y' || choice =='n');//迴圈循環，直到用戶輸入了有效的選項
+                break;//跳出迴圈 
             default:
-                printf("請輸入有效選項。\n\a");
+                printf("請輸入有效選項。\n\a");//提示輸入無效
         }
     }
 
-    system("pause");
-    return 0;
+    system("pause");//等待用戶按下任意鍵
+    return 0;//結束程式 
 }
 
 	
