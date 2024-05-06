@@ -76,20 +76,21 @@ void mainMenu() { // 主畫面
     printf("--------------------------\n");
 }
 void drawRightTeiangle() { //畫直角三角形
-    char ch;
-    int i;j;
-    int n;
+    char ch;//用於存儲輸入的字符
+    int i,j;//循環變量
+    int n;//用於存儲三角形的行數
 
     do {
-        printf("請輸入一個字串（a到n之間）："); //輸入字串及範圍錯誤反應
-        flush(stdin); //清空緩衝區
-        scanf("%s", &ch);
-
-        if ((ch >= 'a' && ch <= 'n')(ch >='A' && ch <= 'N')) {
+        printf("請輸入一個字串（a到n之間）："); //提示用戶輸入一個字符，並指定範圍為a到n之間 
+        fflush(stdin); //清空緩衝區
+        scanf("%c", &ch);//讀取用戶輸入的字符
+        
+        //如果輸入的字元是小寫的 'a' 到 'n' 或大寫的 'A' 到 'N' 
+        if ((ch >= 'a' && ch <= 'n') || (ch >='A' && ch <= 'N')) {
             break; //脫離迴圈
         } else {
-            clearScreen();
-            printf("輸入錯誤,請輸入a到n之間的字母\n\a");
+            clearScreen();//清除螢幕
+            printf("輸入錯誤,請輸入a到n之間的字母\n\a");//提示輸入錯誤並要求重新輸入
         }
     } while (1);
 
