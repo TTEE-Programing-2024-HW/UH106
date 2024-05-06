@@ -8,7 +8,7 @@
 
 void cleanScreen(); //清理螢幕
 void personalScreen();//個人風格畫面
-void boolean checkPassword();//檢查密碼正確
+bool checkPassword();//檢查密碼正確
 void mainMenu();//主畫面
 void drawRightTeiangle(); //畫直角三角形
 void multiplication_table();//乘法表
@@ -44,7 +44,7 @@ void personalScreen() {
     printf("****************************************************************************\n");
 }
 
-void boolean checkPassword(){ //檢查密碼是否正確
+bool checkPassword(){ //檢查密碼是否正確
      char password[] = "2024"; //設定預設密碼
      char inputPassword[5]; //設定輸入密碼
      int passwordAttempts=3; //設定嘗試次數
@@ -56,16 +56,16 @@ void boolean checkPassword(){ //檢查密碼是否正確
         printf("請輸入四位數字密碼（2024）:");
         fgets(inputPassword, sizeof(inputPassword), stdin);//使用 fgets 從標準輸入(stdin)讀取使用者輸入的密碼，並存儲在 inputPassword 中
 
-        if (strcmp(inputPassword, password) == 0) {
-            return true;            
-        } else {
+        if (strcmp(inputPassword, password) == 0) { //如果輸入的密碼與預設密碼相符
+            return true;//返回 true，表示密碼正確            
+        } else { //如果輸入的密碼與預設密碼不相符
             clearScreen();
             personalScreen();
-            printf("密碼錯誤!請重新輸入\n");
+            printf("密碼錯誤!請重新輸入\n", maxAttempts - i - 1);//提示密碼錯誤並告知使用者剩餘輸入次數
         }
     }
     printf("已連續輸入錯誤三次,程式即將結束\a\n");
-	return false; 
+	return false; //結束程式
 }
 
 void mainMenu() { // 主畫面
