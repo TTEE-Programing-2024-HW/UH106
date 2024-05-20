@@ -64,12 +64,14 @@ void personalScreen() {
 }
 // Function to reset the seat chart
 void resetSeatChart() {
-    for (int i = 0; i < ROWS; i++) { // Outer loop to iterate through all the rows
-    for (int j = 0; j < COLS; j++) { // Inner loop to iterate through all the columns in each row
+    int i, j;
+    for (i = 0; i < ROWS; i++) { // // Outer loop to iterate through all the rows
+        for (j = 0; j < COLS; j++) { // Inner loop to iterate through all the columns in each row
             seatChart[i][j] ='-';  // Set each seat to '-' to indicate it is not booked
         }
     }
 }
+
 // Function to randomly book seats
 void randomBook() { 
     srand(time(NULL)); // Set random seed using current time
