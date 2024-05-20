@@ -259,122 +259,122 @@ bool manualBook() {
             continue;// Continue to the next iteration of the loop
         }
         break;// Exit the loop since a valid seat has been selected
-    } while (true);
+    } while (true);// Infinite loop
 
-    seatChart[row][col] = '@';
-    clear_screen();
-    printf("\n  1 2 3 4 5 6 7 8 9\n");
-        for (int i = ROWS - 1; i >= 0; i--) {
-            printf("%d", i + 1);
-            for (int j = 0; j < COLS; j++) {
-                printf(" %c", seatChart[i][j]);
+    seatChart[row][col] = '@';// Mark the selected seat as booked
+    clear_screen();// Clear the screen
+    printf("\n  1 2 3 4 5 6 7 8 9\n");// Print the column numbers (1-9)
+        for (int i = ROWS - 1; i >= 0; i--) {// Iterate through the seat chart from the bottom (row ROWS) to the top (row 1)
+            printf("%d", i + 1);// Print the row number
+            for (int j = 0; j < COLS; j++) {// Iterate through the columns
+                printf(" %c", seatChart[i][j]);// Print the status of the seat at the current row and column
             }
-        printf("\n");
+        printf("\n");// Move to the next line after each row
         }
 
-    printf("press enter to continue...\n");
-    getch();
-    clear_screen();
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-            if (seatChart[i][j] == '@') {
-                seatChart[i][j] = '*';
+    printf("press enter to continue...\n");// Prompt the user to press Enter to continue
+    getch();// Wait for the user to press a key
+    clear_screen();// Clear the screen
+    for (int i = 0; i < ROWS; i++) {// Iterate through each row
+        for (int j = 0; j < COLS; j++) {// Iterate through each column
+            if (seatChart[i][j] == '@') {// If the seat is marked as booked
+                seatChart[i][j] = '*';// Set the seat status to booked
             }
         }
     }
 
-    return true;
+    return true;// Return true to indicate that a seat has been booked
 }
 
 bool checkPassword() {
-    char password[] = "2024";
-    char inputPasword[5];
-    int passwordAttempts;
-    int waitTime = 3;
+    char password[] = "2024";// The correct password
+    char inputPasword[5];// The password entered by the user
+    int passwordAttempts;// The number of password attempts
+    int waitTime = 3;// The wait time between incorrect password attempts
 
-    for (int i = 0; i < 3; i++) {
-        clear_screen();
-        personalScreen();
-        printf("please enter password(2024):\n");
-        fgets(inputPasword, sizeof(inputPasword), stdin);
+    for (int i = 0; i < 3; i++) { // Allow 3 password attempts
+        clear_screen();// Clear the screen
+        personalScreen();// Display the personal screen
+        printf("please enter password(2024):\n");// Prompt the user to enter the password
+        fgets(inputPasword, sizeof(inputPasword), stdin);// Read the user's input
 
-        if (strcmp(inputPasword, password) == 0) {
-            return true;
-        } else {
-            for (int j = waitTime; j > 0; j--) {
-                clear_screen();
-                personalScreen();
-                printf("incorrect password, please try again in %d seconds\n", j);
-                sleep(1);
+        if (strcmp(inputPasword, password) == 0) {// If the entered password matches the correct password
+            return true;// Return true to indicate successful login
+        } else { // If the entered password is incorrect
+            for (int j = waitTime; j > 0; j--) { // Wait for the specified time
+                clear_screen();// Clear the screen
+                personalScreen();// Display the personal screen
+                printf("incorrect password, please try again in %d seconds\n", j);// Inform the user about the wait time
+                sleep(1);// Wait for 1 second
             }
         }
     }
-    printf("you have tried 3 times, program will exit\n");
-    return false;
+    printf("you have tried 3 times, program will exit\n");// Inform the user that the maximum number of attempts has been reached
+    return false;// Return false to indicate failed login
 }
 
 char getInput() {
-    char choice;
-    printf("please enter your choice:\n");
-    fflush(stdin);
-    choice = getch();
-    return choice;
+    char choice;// The user's choice
+    printf("please enter your choice:\n");// Prompt the user to enter their choice
+    fflush(stdin);// Flush the input buffer
+    choice = getch();// Get the user's input (a single character)
+    return choice;// Return the user's choice
 }
 
 int main() {
-    if (!checkPassword()) {
-        return 0;
+    if (!checkPassword()) {// If the password check fails
+        return 0;// Exit the program
     }
 
-    resetSeatChart();
-    randomBook();
+    resetSeatChart();// Reset the seat chart
+    randomBook();// Randomly book seats
 
-    while (true) {
-        clear_screen();
-        mainMenu();
-        choice = getInput();
-        clear_screen();
+    while (true) {// Infinite loop
+        clear_screen();// Clear the screen
+        mainMenu();// Display the main menu
+        choice = getInput();// Get the user's choice
+        clear_screen();// Clear the screen
 
-        switch (choice) {
+        switch (choice) {// Handle the user's choice
             case 'A':
             case 'a':
-                displaySeatChart();
+                displaySeatChart();// Display the seat chart
                 break;
             case 'B':
             case 'b':
-                autoBook();
+                autoBook();// Automatically book seats
                 break;
             case 'C':
             case 'c':
-                manualBook();
+                manualBook();// Manually book seats
                 break;
             case 'D':
             case 'd':
-                do {
-                    printf("are you sure you want to exit? (Y/N)\n");
-                    choice = getInput();
-                    choice = tolower(choice);
+                do { // Confirm exit
+                    printf("are you sure you want to exit? (Y/N)\n");// Prompt the user to confirm exit
+                    choice = getInput();// Get the user's choice
+                    choice = tolower(choice);// Convert the choice to lowercase
 
-                    if (choice == 'y') {
-                        printf("confirm exit\n");
-                        return 0;
-                    } else if (choice == 'n') {
-                        printf("\n");
-                        clear_screen();
-                        break;
-                    } else {
-                        clear_screen();
-                        printf("invalid input please try again\n");
+                    if (choice == 'y') { // If the user confirms exit
+                        printf("confirm exit\n");// Inform the user that the program is exiting
+                        return 0;// Exit the program
+                    } else if (choice == 'n') {// If the user doesn't want to exit
+                        printf("\n");// Print a newline
+                        clear_screen();// Clear the screen
+                        break;// Break out of the inner loop
+                    } else {// If the input is invalid
+                        clear_screen();// Clear the screen
+                        printf("invalid input please try again\n");// Notify the user of the invalid input
                     }
-                } while (choice == 'y' || choice == 'n');
+                } while (choice == 'y' || choice == 'n');// Continue the loop until a valid choice is made
                 break;
-            default:
-                printf("invalid input please try again\n\a");
+            default:// If the input is invalid
+                printf("invalid input please try again\n\a");// Notify the user of the invalid input
         }
     }
 
-    system("pause");
-    return 0;
+    system("pause");// Pause the program until the user presses a key
+    return 0;// Exit the program
 
 }
 
