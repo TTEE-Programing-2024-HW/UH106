@@ -1,40 +1,41 @@
-#include <stdio.h>// 標準輸入輸出庫
-#include <stdlib.h>// 標準庫，包括內存分配、過程控制等
-#include <conio.h>// 控制台輸入輸出
-#include <stdbool.h>// 包含布爾類型支持的標頭文件，提供true和false常量以及bool類型
-#include <string.h>// 字符串操作函數
-#include <ctype.h>// 字符類型函數
-#include <unistd.h>// Unix標準函數（如sleep等）
-#include <time.h>// 時間相關函數
+#include <stdio.h>// Standard Input Output library
+#include <stdlib.h>// Standard library, includes memory allocation, process control, etc.
+#include <conio.h>// // Console Input Output (specific to Windows)
+#include <stdbool.h>// Boolean type support
+#include <string.h>// String manipulation functions
+#include <ctype.h>// Character type functions
+#include <unistd.h>// Unix standard functions 
+#include <time.h>// Time related functions
 
-#define ROWS 9// 定義座位圖的行數
-#define COLS 9// 定義座位圖的列數
-#define BOOKED_SEATS 10// 預訂座位的數量
+#define ROWS 9// Define the number of rows in the seat chart
+#define COLS 9// Define the number of columns in the seat chart
+#define BOOKED_SEATS 10// Number of seats to be booked
 
-void clear_screen();// 清屏函數的聲明
-void personalScreen();// 顯示個人信息屏幕的函數聲明
-void resetSeatChart();// 重置座位圖的函數聲明
-void randomBook();// 隨機預訂座位的函數聲明
-void mainMenu();// 主菜單函數的聲明
-void displaySeatChart();// 顯示座位圖的函數聲明
-bool autoBook();// 自動預訂座位函數的聲明
-bool manualBook();// 手動預訂座位函數的聲明
-bool checkPassword();// 檢查密碼函數的聲明
-char getInput(); // 獲取輸入函數的聲明
+void clear_screen();// Declaration of function to clear screen
+void personalScreen();// Declaration of function to display personal screen
+void resetSeatChart();// Declaration of function to reset seat chart
+void randomBook();// Declaration of function to book seats randomly
+void mainMenu();// Declaration of function to display main menu
+void displaySeatChart();// Declaration of function to display seat chart
+bool autoBook();// Declaration of function to automatically book seats
+bool manualBook();// Declaration of function to manually book seats
+bool checkPassword();// Declaration of function to check password
+char getInput(); // Declaration of function to get user input
 
-char seatChart[ROWS][COLS];// 座位圖的二維字符陣列(ROWS行和COLS列)
-char choice;// 儲存用戶在主菜單中選擇的選項('a','b','c','d')
-char input[20]; // 儲存用戶輸入的字符串(長度為20)
-int row, col;// 行和列的變量
-int numSeat; // 預訂座位數的變量
-int mode, min = 1, max = 2;// 模式選擇和隨機數範圍變量('min'和'max'定義了隨機數生成的範圍，預設為1和2)
-int row1, row2, col1, col2, col3, col4;// 儲存多個行和列的索引
-char *token;// 字符串分割用的指針
-char satisfaction; // 用戶滿意度的字符變量
+char seatChart[ROWS][COLS];// 2D character array to represent the seat chart (ROWS rows and COLS columns)
+char choice;// Character to store user's choice('a','b','c','d')
+char input[20]; // String to store user's input(length:20) 
+int row, col;// Variables for row and column
+int numSeat; // Variable for number of seats to be booked
+int mode, min = 1, max = 2;// Variables for the mode selection and random number range ('min' and 'max' define the range of random number generation, default is 1 and 2)
+int row1, row2, col1, col2, col3, col4;// Variables to store multiple row and column indices
+char *token;// Pointer for string tokenization
+char satisfaction; // Character variable for user's satisfaction
 
-
+// Define function to clear screen
 void clear_screen() {
-    system("cls"); // 使用系統命令清除屏幕
+    system("cls");  // Use system command to clear screen (specific to Windows)
+}
 }
 
 void personalScreen() {
@@ -62,196 +63,202 @@ void personalScreen() {
     printf("*   |________/                                                \\________|   *\n");
     printf("****************************************************************************\n");
 }
-// 重置座位圖的函數
+// Function to reset the seat chart
 void resetSeatChart() {
-    for (int i = 0; i < ROWS; i++) { // 外層迴圈，用來遍歷一行中的所有的行
-    for (int j = 0; j < COLS; j++) { // 內層迴圈，用來遍歷每一行中的所有列
-            seatChart[i][j] ='-';  // 將每個座位設置為'-'表示未預訂
+    for (int i = 0; i < ROWS; i++) { // Outer loop to iterate through all the rows
+    for (int j = 0; j < COLS; j++) { // Inner loop to iterate through all the columns in each row
+            seatChart[i][j] ='-';  // Set each seat to '-' to indicate it is not booked
         }
     }
 }
-// 隨機預訂座位的函數
+// Function to randomly book seats
 void randomBook() { 
-    srand(time(NULL)); // 用當前時間設置隨機數種子 
-    for (int i = 0; i < BOOKED_SEATS; i++) { // 遍歷需要預訂的座位數
-        row = rand() % ROWS; // 生成一個隨機的行索引，範圍在0到ROWS-1之間 
-/*這行代碼的目的是在0和ROWS-1之間生成一個隨機數，這個數值會用來作為座位圖中的行索引(例如，如果ROWS是9，那麼rand() % ROWS的結果將會是0到8之間的隨機數)*/
-        col = rand() % COLS;// 生成一個隨機的列索引，範圍在0到COLS-1之間
-/*這行代碼的目的是在0和COLS-1之間生成一個隨機數，這個數值會用來作為座位圖中的列索引(例如，如果COLS是9，那麼rand() % COLS的結果將會是0到8之間的隨機數)*/
-        seatChart[row][col] = '*'; // 將隨機選定的座位標記為'*'表示已預訂
+    srand(time(NULL)); // Set random seed using current time
+    for (int i = 0; i < BOOKED_SEATS; i++) { // Iterate through the number of seats to be booked
+        row = rand() % ROWS; // Generate a random row index within the range of 0 to ROWS-1
+    /*The purpose of this line of code is to generate a random number between 0 and ROWS-1, and this value will be used as the row index in the seat 
+	chart (for example, if ROWS is 9, the result of rand() % ROWS will be a random number between 0 and 8)*/
+        col = rand() % COLS;// Generate a random column index within the range of 0 to COLS-1
+    /*The purpose of this line of code is to generate a random number between 0 and COLS-1, and this value will be used as the column index in the seat 
+	chart (for example, if COLS is 9, the result of rand() % COLS will be a random number between 0 and 8)*/
+        seatChart[row][col] = '*'; // Mark the randomly selected seat as '*' to indicate it is booked
     }
 }
 
 void mainMenu() {
     printf("----------[Booking System]----------\n");
-    printf("| a. Available seats 		   |\n"); // 選項：顯示可用座位
-    printf("| b. Arrange for you	       	   |\n"); // 選項：系統自動為您安排座位
-    printf("| c. Choose by yourself 	   |\n"); // 選項：自己選擇座位
-    printf("| d. Exit 			   |\n");
+    printf("| a. Available seats 		   |\n"); // Display option a: View available seats
+    printf("| b. Arrange for you	       	   |\n"); // Display option b: Arrange seats for you
+    printf("| c. Choose by yourself 	   |\n"); // Display option c: Choose seats yourself
+    printf("| d. Exit 			   |\n"); // Display option d: Exit
     printf("------------------------------------\n");
 }
-
+// Function to display the seat chart
 void displaySeatChart() {
-    printf("\n  1 2 3 4 5 6 7 8 9\n"); // 打印座位圖的列號(1-9列)
-    for (int i = ROWS - 1; i >= 0; i--) { //通過一個 for 循環從底部（第 ROWS 行）到頂部（第 1 行）遍歷座位圖的每一行，行號從 ROWS 開始遞減，每次遞減 1 
-        printf("%d", i + 1);//在每行的開始打印行號，行號從 1 到 ROWS
-        for (int j = 0; j < COLS; j++) { //從 0 開始，直到 j 等於 COLS（列數）為止。在這個循環中，每次迭代都會增加 j 的值
-            printf(" %c", seatChart[i][j]); //打印當前行（由外層循環的變量 i 表示）和當前列（由內層循環的變量 j 表示）位置的座位狀態
+    printf("\n  1 2 3 4 5 6 7 8 9\n"); // Print the column numbers (1-9)
+    for (int i = ROWS - 1; i >= 0; i--) { // Iterate through the seat chart from the bottom (row ROWS) to the top (row 1), decrementing the row number by 1 each iteration
+        printf("%d", i + 1);// Print the row number, starting from 1 to ROWS
+        for (int j = 0; j < COLS; j++) { // Iterate from 0 to COLS-1 (the column index)
+            printf(" %c", seatChart[i][j]);// Print the status of the seat at the current row (from the outer loop variable i) and current column (from the inner loop variable j)
         }
-        printf("\n");// 在每行結束時換行
+        printf("\n");// Move to the next line after each row
     }
-    printf("按下任意鍵返回主選單...");// 提示用戶按任意鍵返回主菜單
-    getch();// 等待用戶輸入
-    clear_screen();// 清屏
+    printf("Press any key to return to the main menu...");// Prompt the user to press any key to return to the main menu
+    getch();// Wait for user input
+    clear_screen();// Clear the screen
 }
-
+// Function to automatically book seats
 bool autoBook() {
-    srand(time(NULL));// 用當前時間作為隨機數生成器的種子
+    srand(time(NULL));// Set random seed using current time
+    
+    // Main loop to get the number of seats from the user
     do {
-        printf("how many seats do you need?\n");// 提示用戶輸入需要的座位數
-        fflush(stdout);// 刷新輸出緩衝區
-        if (scanf("%d", &numSeat)!= 1) { // 讀取座位數並檢查輸入是否有效
-            clear_screen();// 如果輸入無效，清屏
-            printf("invalid input please try again\n");// 通知用戶輸入無效
+        printf("how many seats do you need?\n");// Prompt the user to enter the number of seats needed
+        fflush(stdout);// Flush the output buffer
+        if (scanf("%d", &numSeat)!= 1) { // Read number of seats and check if input is valid
+            clear_screen();// Clear the screen
+            printf("invalid input please try again\n");// Notify the user that the input is invalid
 
-            while (getchar() != '\n');// 清除輸入緩衝區
-            continue;// 重新開始循環
+            while (getchar() != '\n');// Clear the input buffer
+            continue;// Continue to the next iteration of the loop
+        }
         }
 
-        if (numSeat < 1 || numSeat > 4) { // 如果超出範圍(小於1以下 或大於4以上) 
-            clear_screen();// 清屏
-            printf("invalid input please try again\n");// 通知用戶輸入無效
+        if (numSeat < 1 || numSeat > 4) { // If the number of seats is out of range (less than 1 or greater than 4)  
+            clear_screen();// Clear the screen
+            printf("invalid input please try again\n");// Notify the user that the input is invalid
         }
-    } while (numSeat < 1 || numSeat > 4);// 重複直到輸入有效座位數
+    } while (numSeat < 1 || numSeat > 4);// Repeat until a valid number of seats is entered
+
 
     do {
-        bool found = false;// 標誌是否找到有效的座位安排
-        if (numSeat < 4) { // 如如果需要的座位數小於4，進入這段程式碼
-            if (numSeat == 1) { // 如果只需要一個座位
+        bool found = false;// Flag to indicate whether a valid seat arrangement has been found
+        if (numSeat < 4) { // If the number of seats needed is less than 4, enter this code block
+            if (numSeat == 1) { // If only one seat is needed
                 do {
-                    row1 = rand() % ROWS; //使用隨機數生成器隨機選擇一行
-                    col1 = rand() % (COLS - numSeat + 1);// 隨機生成列
-                } while (seatChart[row1][col1] == '*');// 如果座位已被預訂，重複此過程
-                seatChart[row1][col1] = '@';// 暫時標記該座位已預訂
-                found = true;// 標記找到有效的座位安排
-            } else if (numSeat == 2) { // 如果需要兩個座位
+                    row1 = rand() % ROWS;// Use the random number generator to randomly select a row
+                    col1 = rand() % (COLS - numSeat + 1);// Randomly generate a column
+                } while (seatChart[row1][col1] == '*');// If the seat is already booked, repeat this process
+                seatChart[row1][col1] = '@';// Temporarily mark this seat as booked
+                found = true;// Mark that a valid seat arrangement has been found
+            } else if (numSeat == 2) { // If two seats are needed
                 do {
-                    row1 = rand() % ROWS;//使用隨機數生成器隨機選擇一行
-                    col1 = rand() % (COLS - numSeat + 1);// 隨機生成列號，確保有足夠的連續座位
-                    col2 = (col1 + 1) % COLS;// 計算第二個座位的列號，確保它是連續的
-                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*');// 如果任何一個座位已被預訂，重複此過程
-                seatChart[row1][col1] = '@';// 暫時標記第一個座位已預訂
-                seatChart[row1][col2] = '@'; // 暫時標記第二個座位已預訂
-                found = true;// 標記找到有效的座位安排
-            } else if (numSeat == 3) {// 如果需要三個座位
+                    row1 = rand() % ROWS;// Use the random number generator to randomly select a row
+                    col1 = rand() % (COLS - numSeat + 1);// Randomly generate a column number, ensuring there are enough consecutive seats
+                    col2 = (col1 + 1) % COLS;// Calculate the column number for the second seat, ensuring it is consecutive
+                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*');// If either seat is already booked, repeat this process
+                seatChart[row1][col1] = '@';// Temporarily mark the first seat as booked
+                seatChart[row1][col2] = '@'; // Temporarily mark the second seat as booked
+                found = true;// Mark that a valid seat arrangement has been found
+            } else if (numSeat == 3) {// If three seats are needed
                 do {
-                    row1 = rand() % ROWS;// 隨機生成行號
-                    col1 = rand() % (COLS - numSeat + 1);// 隨機生成列號，確保有足夠的連續座位
-                    col2 = (col1 + 1) % COLS;// 計算第二個座位的列號，確保它是連續的 
-                    col3 = (col2 + 1) % COLS;// 計算第三個座位的列號，確保它是連續的
-                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*' || seatChart[row1][col3] == '*');// 如果任何一個座位已被預訂，重複此過程
-                seatChart[row1][col1] = '@';// 暫時標記第一個座位已預訂
-                seatChart[row1][col2] = '@';// 暫時標記第二個座位已預訂
-                seatChart[row1][col3] = '@';// 暫時標記第三個座位已預訂
-                found = true;// 標記找到有效的座位安排
+                    row1 = rand() % ROWS;// Randomly generate a row number
+                    col1 = rand() % (COLS - numSeat + 1);// Randomly generate a column number, ensuring there are enough consecutive seats
+                    col2 = (col1 + 1) % COLS;// Calculate the column number for the second seat, ensuring it is consecutive 
+                    col3 = (col2 + 1) % COLS;// Calculate the column number for the third seat, ensuring it is consecutive
+                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*' || seatChart[row1][col3] == '*');// If any of the seats are already booked, repeat this process
+                seatChart[row1][col1] = '@';// Temporarily mark the first seat as booked
+                seatChart[row1][col2] = '@';// Temporarily mark the second seat as booked
+                seatChart[row1][col3] = '@';// Temporarily mark the third seat as booked
+                found = true;// Mark that a valid seat arrangement has been found
             }
-        } else {// 否則，如果需要的座位數為四個
-            mode = rand() % (max - min + 1) + 1;//生成一個介於 min 和 max 之間的隨機整數
-            mode = mode % 2;//將先前生成的隨機數取餘數除以 2，以獲得一個範圍在 0 到 1 之間的隨機數
-            if (mode == 0) { // 如果模式為0，表示選擇連續四個座位
+        } else {// Otherwise, if the number of seats needed is four
+            mode = rand() % (max - min + 1) + 1;//Generate a random integer between min and max
+            mode = mode % 2;// Take the remainder of the previously generated random number divided by 2 to get a random number between 0 and 1
+            if (mode == 0) { // If the mode is 0, it means choosing 4 consecutive seats
                 do {
-                    row1 = rand() % ROWS;// 隨機生成行
-                    col1 = rand() % (COLS - numSeat + 1);// 隨機生成列號，確保有足夠的連續座位
-                    col2 = (col1 + 1) % COLS;// 計算第二個座位的列號，確保它是連續的
-                    col3 = (col2 + 1) % COLS;// 計算第三個座位的列號，確保它是連續的
-                    col4 = (col3 + 1) % COLS;// 計算第四個座位的列號，確保它是連續的
-                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*' || seatChart[row1][col3] == '*' || seatChart[row1][col4] == '*');// 如果任何一個座位已被預訂，重複此過程
-                seatChart[row1][col1] = '@';// 標記第一個座位已預訂
-                seatChart[row1][col2] = '@';// 標記第二個座位已預訂
-                seatChart[row1][col3] = '@';// 標記第三個座位已預訂
-                seatChart[row1][col4] = '@';// 標記第四個座位已預訂
-                found = true;// 標記找到有效的座位安排
-            } else { // 否則，選擇2+2 座位模式
+                    row1 = rand() % ROWS;// Randomly generate a row
+                    col1 = rand() % (COLS - numSeat + 1);// Randomly generate a column number, ensuring there are enough 
+                    col2 = (col1 + 1) % COLS;// Calculate the column number for the second seat, ensuring it is consecutive
+                    col3 = (col2 + 1) % COLS;// Calculate the column number for the third seat, ensuring it is consecutive
+                    col4 = (col3 + 1) % COLS;// Calculate the column number for the fourth seat, ensuring it is consecutive
+                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*' || seatChart[row1][col3] == '*' || seatChart[row1][col4] == '*');// If any of the seats are already booked, repeat this process
+                seatChart[row1][col1] = '@';// Mark the first seat as booked
+                seatChart[row1][col2] = '@';// Mark the second seat as booked
+                seatChart[row1][col3] = '@';// Mark the third seat as booked
+                seatChart[row1][col4] = '@';// Mark the fourth seat as booked
+                found = true;// Mark that a valid seat arrangement has been found
+            } else { // Otherwise, choose the 2+2 seat mode
                 do {
-                    row1 = rand() % (ROWS - 1);// 隨機生成第一行
-                    row2 = (row1 + 1) % ROWS;// 計算第二行號，確保它是連續的
-                    col1 = rand() % (COLS - numSeat + 1);// 隨機生成列號，確保有足夠的連續座位
-                    col2 = (col1 + 1) % COLS;// 計算第二個座位的列號，確保它是連續的
-                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*' || seatChart[row2][col1] == '*' || seatChart[row2][col2] == '*');// 如果任何一個座位已被預訂，重複此過程
-                seatChart[row1][col1] = '@';// 標記第一個座位已預訂
-                seatChart[row1][col2] = '@';// 標記第二個座位已預訂
-                seatChart[row2][col1] = '@';// 標記第三個座位已預訂
-                seatChart[row2][col2] = '@';// 標記第四個座位已預訂
-                found = true;// 標記找到有效的座位安排
+                    row1 = rand() % (ROWS - 1);// Randomly generate the first row
+                    row2 = (row1 + 1) % ROWS;// Calculate the second row number, ensuring it is consecutive
+                    col1 = rand() % (COLS - numSeat + 1);// Randomly generate a column number, ensuring there are enough consecutive seats
+                    col2 = (col1 + 1) % COLS;// Calculate the column number for the second seat, ensuring it is consecutive
+                } while (seatChart[row1][col1] == '*' || seatChart[row1][col2] == '*' || seatChart[row2][col1] == '*' || seatChart[row2][col2] == '*');// If any of the seats are already booked, repeat this process
+                seatChart[row1][col1] = '@';// Mark the first seat as booked
+                seatChart[row1][col2] = '@';// Mark the second seat as booked
+                seatChart[row2][col1] = '@';// Mark the third seat as booked
+                seatChart[row2][col2] = '@';// Mark the fourth seat as booked
+                found = true;// Mark that a valid seat arrangement has been found
             }
         }
         
-        printf("\n  1 2 3 4 5 6 7 8 9\n");// 打印列號(1-9)
-        for (int i = ROWS - 1; i >= 0; i--) {//該迴圈從座位圖的最後一行開始向上遍歷。 ROWS - 1 表示從座位圖的最後一行開始
-            printf("%d", i + 1);// 打印行號
-                for (int j = 0; j < COLS; j++) {//從該行的第一個座位開始，當計數器 j 小於列數時，迴圈繼續執行
-                    printf(" %c", seatChart[i][j]);//表示座位圖中第 i 行、第 j 列的座位狀態
+        printf("\n  1 2 3 4 5 6 7 8 9\n");// Print the column numbers (1-9)
+        for (int i = ROWS - 1; i >= 0; i--) {//This loop starts from the last row of the seat chart and iterates upwards. ROWS - 1 means it starts from the last row of the seat chart
+            printf("%d", i + 1);// Print the row number
+                for (int j = 0; j < COLS; j++) {// Starting from the first seat in the row, the loop continues as long as the counter j is less than the number of columns
+                    printf(" %c", seatChart[i][j]);// Represents the state of the seat at row i, column j in the seat chart
             }
-        printf("\n");// 在每行結束時換行
+        printf("\n");// Move to the next line after each row
         }
 
-        printf("are you satisfaction with the suggested seats? (Y/N)\n");// 顯示座位建議是否滿意
-        fflush(stdout);// 刷新輸出緩衝區
-        satisfaction = getch();// 獲取用戶滿意度
-        satisfaction = tolower(satisfaction);// 將輸入轉換為小寫
-        if (satisfaction != 'y') { // 如果不滿意
-            clear_screen();// 清空螢幕
-            for (int i = 0; i < ROWS; i++) {// 遍歷每一行
-                for (int j = 0; j < COLS; j++) {// 遍歷每一列
-                    if (seatChart[i][j] == '@') {// 如果座位已預訂
-                        seatChart[i][j] = '-';// 將座位狀態設置為空閒
+        printf("are you satisfaction with the suggested seats? (Y/N)\n");// Display whether the user is satisfied with the suggested seats
+        fflush(stdout);// Flush the output buffer
+        satisfaction = getch();// Get the user's satisfaction level
+        satisfaction = tolower(satisfaction);// Convert the input to lowercase
+        if (satisfaction != 'y') { // If not satisfied
+            clear_screen();// Clear the screen
+            for (int i = 0; i < ROWS; i++) {// Iterate through each row
+                for (int j = 0; j < COLS; j++) {// Iterate through each column
+                    if (seatChart[i][j] == '@') {// If the seat is booked
+                        seatChart[i][j] = '-';// Set the seat status to unbooked
                     }
                 }
             }
-        } else {// 如果滿意
-            for (int i = 0; i < ROWS; i++) { // 遍歷每一行
-                for (int j = 0; j < COLS; j++) { // 遍歷每一列
-                    if (seatChart[i][j] == '@') {// 如果座位已預訂
-                     seatChart[i][j] = '*';// 將座位狀態設置為已預訂
+        } else {// If satisfied
+            for (int i = 0; i < ROWS; i++) { // Iterate through each row
+                for (int j = 0; j < COLS; j++) { // Iterate through each column
+                    if (seatChart[i][j] == '@') {// If the seat is booked
+                     seatChart[i][j] = '*';// Set the seat status to booked
 					}
                 }
             }
-            printf("press enter to continue...\n");// 提示用戶按 Enter 鍵繼續
-            getch();// 等待用戶按鍵
-            clear_screen();// 清空螢幕
-            break;// 跳出迴圈
+            printf("press enter to continue...\n");// Prompt the user to press Enter to continue
+            getch();// Wait for the user to press a key
+            clear_screen();// Clear the screen
+            break;// Break out of the loop
         }
-    } while (true); // 無限迴圈直到用戶滿意
+    } while (true); // Infinite loop until the user is satisfied
 
-    clear_screen();// 清空螢幕
-    return 0;// 返回函數值
+    clear_screen();// Clear the screen
+    return 0;// Return the function value
 }
 
 bool manualBook() {
     do {
-        printf("please enter seat you want to book\n");
-        fgets(input, sizeof(input), stdin);
-        token = strtok(input, "-");
-        if (token == NULL) {
-            printf("invalid input please try again\n");
-            continue;
+        printf("please enter seat you want to book\n");// Prompt the user to enter the seat they want to book
+        fgets(input, sizeof(input), stdin);// Read the user input
+        token = strtok(input, "-");// Tokenize the input by the "-" character
+        if (token == NULL) { // If the token is NULL, the input is invalid
+            printf("invalid input please try again\n");// Notify the user that the input is invalid
+            continue;// Continue to the next iteration of the loop
         }
-        row = atoi(token) - 1;
-        token = strtok(NULL, "-");
-        if (token == NULL) {
-            printf("invalid input please try again\n");
-            continue;
+        row = atoi(token) - 1;// Convert the first token to an integer and subtract 1 to get the row index
+        token = strtok(NULL, "-");// Get the next token
+        if (token == NULL) { // If the token is NULL, the input is invalid
+            printf("invalid input please try again\n");// Notify the user that the input is invalid
+            continue;// Continue to the next iteration of the loop
         }
-        col = atoi(token) - 1;
-        if (row < 0 || row > ROWS || col < 0 || col > COLS) {
-            printf("invalid input please try again\n");
-            continue;
+        col = atoi(token) - 1;// Convert the second token to an integer and subtract 1 to get the column index
+        if (row < 0 || row > ROWS || col < 0 || col > COLS) { // If the row or column index is out of bounds
+            printf("invalid input please try again\n");// Notify the user that the input is invalid
+            continue;// Continue to the next iteration of the loop
         }
-        if (seatChart[row][col] == '*') {
-            printf("this seat is already booked\n");
-            continue;
+        if (seatChart[row][col] == '*') { // If the selected seat is already booked
+            printf("this seat is already booked\n");// Notify the user that the seat is already booked
+            continue;// Continue to the next iteration of the loop
         }
-        break;
+        break;// Exit the loop since a valid seat has been selected
     } while (true);
 
     seatChart[row][col] = '@';
@@ -371,4 +378,8 @@ int main() {
 
 }
 
-
+/*這次的作業3就不像上次的作業2那樣的慌張，對於GitHub基本的設定游刃有餘，以及add、commit、push都相對前一次來說要簡單，而且在助教的教導下我也會git除錯了!
+原本當十名名助教幫我用touch hw3.c了但是後來git add hw3.c上去後再輸入git status後卻顯示不出來，當下第一反應就是...問助教，但問了之後我就在自己重新定義一次並上網自己找
+debug的方法，沒想到就可以了，要不是之前看助教做過一遍，我也沒辦法除錯出來，還是只會一昧的麻煩助教很感謝助教的磨練哈哈，在成設實驗時，助教說他教我們已經算溫柔的了在往
+上大家都是直接的，聽完後真的覺得我們助教算溫柔了...謝謝助教耐心一地步一步教我們，雖然我們老是說你很兇，但是布匈的話我們就部會很認真地去對待成設了，我會繼續努力寫出之
+後HW4的!*/ 
