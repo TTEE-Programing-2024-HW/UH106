@@ -74,7 +74,6 @@ void resetSeatChart() {
 
 // Function to randomly book seats
 void randomBook() { 
-   int row, col;
     srand(time(NULL)); // Set random seed using current time
     for (int i = 0; i < BOOKED_SEATS; i++) { // Iterate through the number of seats to be booked
         row = rand() % ROWS; // Generate a random row index within the range of 0 to ROWS-1
@@ -124,8 +123,7 @@ bool autoBook() {
             while (getchar() != '\n');// Clear the input buffer
             continue;// Continue to the next iteration of the loop
         }
-        }
-
+        
         if (numSeat < 1 || numSeat > 4) { // If the number of seats is out of range (less than 1 or greater than 4)  
             clear_screen();// Clear the screen
             printf("invalid input please try again\n");// Notify the user that the input is invalid
