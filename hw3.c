@@ -279,3 +279,96 @@ bool manualBook() {
     return true;
 }
 
+bool checkPassword() {
+    char password[] = "2024";
+    char inputPasword[5];
+    int passwordAttempts;
+    int waitTime = 3;
+
+    for (int i = 0; i < 3; i++) {
+        clear_screen();
+        personalScreen();
+        printf("please enter password(2024):\n");
+        fgets(inputPasword, sizeof(inputPasword), stdin);
+
+        if (strcmp(inputPasword, password) == 0) {
+            return true;
+        } else {
+            for (int j = waitTime; j > 0; j--) {
+                clear_screen();
+                personalScreen();
+                printf("incorrect password, please try again in %d seconds\n", j);
+                sleep(1);
+            }
+        }
+    }
+    printf("you have tried 3 times, program will exit\n");
+    return false;
+}
+
+char getInput() {
+    char choice;
+    printf("please enter your choice:\n");
+    fflush(stdin);
+    choice = getch();
+    return choice;
+}
+
+int main() {
+    if (!checkPassword()) {
+        return 0;
+    }
+
+    resetSeatChart();
+    randomBook();
+
+    while (true) {
+        clear_screen();
+        mainMenu();
+        choice = getInput();
+        clear_screen();
+
+        switch (choice) {
+            case 'A':
+            case 'a':
+                displaySeatChart();
+                break;
+            case 'B':
+            case 'b':
+                autoBook();
+                break;
+            case 'C':
+            case 'c':
+                manualBook();
+                break;
+            case 'D':
+            case 'd':
+                do {
+                    printf("are you sure you want to exit? (Y/N)\n");
+                    choice = getInput();
+                    choice = tolower(choice);
+
+                    if (choice == 'y') {
+                        printf("confirm exit\n");
+                        return 0;
+                    } else if (choice == 'n') {
+                        printf("\n");
+                        clear_screen();
+                        break;
+                    } else {
+                        clear_screen();
+                        printf("invalid input please try again\n");
+                    }
+                } while (choice == 'y' || choice == 'n');
+                break;
+            default:
+                printf("invalid input please try again\n\a");
+        }
+    }
+
+    system("pause");
+    return 0;
+
+}
+
+
