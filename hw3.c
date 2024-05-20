@@ -74,6 +74,7 @@ void resetSeatChart() {
 
 // Function to randomly book seats
 void randomBook() { 
+   int row, col;
     srand(time(NULL)); // Set random seed using current time
     for (int i = 0; i < BOOKED_SEATS; i++) { // Iterate through the number of seats to be booked
         row = rand() % ROWS; // Generate a random row index within the range of 0 to ROWS-1
