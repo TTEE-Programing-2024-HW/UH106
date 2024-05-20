@@ -61,3 +61,28 @@ void personalScreen() {
     printf("*   |________/                                                \\________|   *\n");
     printf("****************************************************************************\n");
 }
+void resetSeatChart() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            seatChart[i][j] ='-';
+        }
+    }
+}
+
+void randomBook() {
+    srand(time(NULL));
+    for (int i = 0; i < BOOKED_SEATS; i++) {
+        row = rand() % ROWS;
+        col = rand() % COLS;
+        seatChart[row][col] = '*';
+    }
+}
+
+void mainMenu() {
+    printf("----------[Booking System]----------\n");
+    printf("| a. Available seats 		   |\n");
+    printf("| b. Arrange for you	       	   |\n");
+    printf("| c. Choose by yourself 	   |\n");
+    printf("| d. Exit 			   |\n");
+    printf("------------------------------------\n");
+}
