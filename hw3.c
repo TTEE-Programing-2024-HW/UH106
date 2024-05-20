@@ -36,7 +36,6 @@ char satisfaction; // Character variable for user's satisfaction
 void clear_screen() {
     system("cls");  // Use system command to clear screen (specific to Windows)
 }
-}
 
 void personalScreen() {
     printf("****************************************************************************\n");
