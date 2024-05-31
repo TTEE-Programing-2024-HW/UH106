@@ -77,7 +77,8 @@ bool checkPassword() {
     int passwordAttempts;
     int waitTime = 3;
     
-    for (int i = 0; i < 3; i++) {
+    int i;
+    for (i = 0; i < 3; i++) {
         clear_screen();
         personalScreen();
         printf("please enter password(2024):");
