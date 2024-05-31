@@ -78,6 +78,7 @@ bool checkPassword() {
     int waitTime = 3;
     
     int i;
+    int j;
     for (i = 0; i < 3; i++) {
         clear_screen();
         personalScreen();
@@ -87,7 +88,7 @@ bool checkPassword() {
         if (strcmp(inputPasword, password) == 0) {
             return true;
         } else {
-            for (int j = waitTime; j > 0; j--) {
+            for (j = waitTime; j > 0; j--) {
                 clear_screen();
                 personalScreen();
                 printf("incorrect password, please try again in %d seconds\n", j);
