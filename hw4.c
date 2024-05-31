@@ -100,3 +100,64 @@ bool checkPassword() {
     return false;
 }
 
+void mainMenu() {
+    printf("----------[Booking System]----------\n");
+    printf("| a. Enter student grades           |\n");
+    printf("| b. Display student grades	    |\n");
+    printf("| c. Search for student grades 	    |\n");
+    printf("| d. Grade ranking                  |\n");
+    printf("| e. Exit system  		    |\n");
+    printf("------------------------------------\n");
+}
+
+void inputData() { //check
+    if (studentCount >= MAX_STUDENT) {
+        printf("you have reached the maximum number of students\n");
+        return;
+    }
+    
+    int n;
+    printf("please enter the number of students:");
+    while (scanf("%d", &n) != 1 || n < MIN_STUDENT || n > MAX_STUDENT) {
+        printf("invalid input, please enter again:");
+        while (getchar()!= '\n');
+    }
+
+    for (int i = 0; i < n; i++) {
+        printf("please enter student%d name: ", i + 1);
+        fflush(stdin);
+        scanf("%s", student[studentCount].name);
+
+        printf("please enter student ID: ");
+        while (scanf("%d", &student[studentCount].id) != 1 || student[studentCount].id < 100000 || student[studentCount].id > 999999) {
+            printf("invalid ID. please enter again:\n");
+            while (getchar()!= '\n');
+        }
+        
+        printf("please enter math score: ");
+        while (scanf("%d", &student[studentCount].math) != 1 || student[studentCount].math < 0 || student[studentCount].math > 100) {
+            printf("invalid score. please enter again:\n");
+            while (getchar()!= '\n');
+        }
+
+        printf("please enter physics score: ");
+        while (scanf("%d", &student[studentCount].physics) != 1 || student[studentCount].physics < 0 || student[studentCount].physics > 100) {
+            printf("invalid score. please enter again:\n");
+            while (getchar()!= '\n');
+        }
+
+        printf("please enter english score: ");
+        while (scanf("%d", &student[studentCount].english) != 1 || student[studentCount].english < 0 || student[studentCount].english > 100) {
+            printf("invalid score. please enter again:\n");
+            while (getchar()!= '\n');
+        }
+        
+        student[studentCount].average = (student[studentCount].math + student[studentCount].physics + student[studentCount].english) / 3.0;
+        studentCount++;
+    }
+
+    printf("press any key to continue...\n");
+    getch();
+    clear_screen();
+}
+
