@@ -161,3 +161,45 @@ void inputData() { //check
     clear_screen();
 }
 
+void displayData() {
+    for (int i = 0; i < studentCount; i++) {
+        printf("name: %s\n", student[i].name);
+        printf("ID: %d\n", student[i].id);
+        printf("math: %d\n", student[i].math);
+        printf("physics: %d\n", student[i].physics);
+        printf("english: %d\n", student[i].english);
+        printf("average: %.2f\n", student[i].average);
+    }
+
+    printf("press any key to continue...\n");
+    getch();
+    clear_screen();
+}
+
+void searchGrade() {
+    char searchName[30];
+    printf("please enter student name: ");
+    fflush(stdin);
+    scanf("%s", searchName);
+
+    for (int i = 0; i <= studentCount; i++) {
+        if (strcmp(student[i].name, searchName) == 0) {
+            printf("name: %s\n", student[i].name);
+            printf("ID: %d\n", student[i].id);
+            printf("math: %d\n", student[i].math);
+            printf("physics: %d\n", student[i].physics);
+            printf("english: %d\n", student[i].english);
+            printf("average: %.2f\n", student[i].average);
+            break;
+        }
+
+        if (i == studentCount) {
+            printf("student not found\n");
+            break;
+        }
+    }
+
+    printf("press any key to continue...\n");
+    getch();
+    clear_screen();
+}
