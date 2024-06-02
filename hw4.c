@@ -241,3 +241,58 @@ char getInput() {
     return choice;
 }
 
+int main() {
+    char choice;
+    if (!checkPassword()) {
+        return 0;
+    }
+
+    while (true) {
+        clear_screen();
+        mainMenu();
+        choice = getInput();
+        clear_screen();
+
+        switch (choice) {
+            case 'A':
+            case 'a':
+                inputData();
+                break;
+            case 'B':
+            case 'b':
+                displayData();
+                break;
+            case 'C':
+            case 'c':
+                searchGrade();
+                break;
+            case 'D':
+            case 'd':
+                gradeRanking();
+                break;
+            case 'E':
+            case 'e':
+                do {
+                    printf ("are you sure you want to exit? (y/n)\n");
+                    choice = getInput();
+                    choice = tolower(choice);
+                    if (choice == 'y') {
+                        printf("exiting...\n");
+                        return 0;
+                    } else if (choice == 'n') {
+                        printf("\n");
+                        break;
+                    } else {
+                        clear_screen();
+                        printf("invalid input\n");
+                    } 
+                } while (choice == 'y' || choice == 'n');
+                break;
+            default:
+                printf("invalid input\n");
+        }
+    }
+
+    system("pause");
+    return 0;    
+}
