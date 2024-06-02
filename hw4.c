@@ -85,16 +85,16 @@ bool checkPassword() {
         clear_screen(); // Clear the screen
         personalScreen(); // Display personal screen
         printf("please enter password(2024):");
-        fgets(inputPasword, sizeof(inputPasword), stdin);
+        fgets(inputPasword, sizeof(inputPasword), stdin); // Get user input
 
-        if (strcmp(inputPasword, password) == 0) {
-            return true;
+        if (strcmp(inputPasword, password) == 0) {  // Check if input matches the correct password
+            return true; // If correct, return true
         } else {
-            for (j = waitTime; j > 0; j--) {
-                clear_screen();
-                personalScreen();
+            for (j = waitTime; j > 0; j--) { // Wait before allowing another attempt
+                clear_screen(); // Clear the screen
+                personalScreen(); // Display personal screen
                 printf("incorrect password, please try again in %d seconds\n", j);
-                sleep(1);
+                sleep(1); // Wait for 1 second
             }
         }
     }
@@ -112,20 +112,20 @@ void mainMenu() {
     printf("------------------------------------\n");
 }
 
-void inputData() { //check
+void inputData() { // Check if maximum number of students is reached
     if (studentCount >= MAX_STUDENT) {
         printf("you have reached the maximum number of students\n");
         return;
     }
     
-    int n;
+    int n;  // Variable to store number of students to be entered
     printf("please enter the number of students:");
-    while (scanf("%d", &n) != 1 || n < MIN_STUDENT || n > MAX_STUDENT) {
+    while (scanf("%d", &n) != 1 || n < MIN_STUDENT || n > MAX_STUDENT) {  // Validate input
         printf("invalid input, please enter again:");
-        while (getchar()!= '\n');
+        while (getchar()!= '\n'); // Clear input buffer
     }
 
-    int i;
+    int i; // Loop counter for students
     for (i = 0; i < n; i++) {
         printf("please enter student%d name: ", i + 1);
         fflush(stdin);
