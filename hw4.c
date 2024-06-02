@@ -203,6 +203,7 @@ void searchGrade() {
     getch();
     clear_screen();
 }
+
 void sort_student() {
     for (int i = 0; i < studentCount - 1; i++) {
         for (int j = i + 1; j < studentCount; j++) {
@@ -231,3 +232,12 @@ void gradeRanking() {
     getch();
     clear_screen();
 }
+
+char getInput() {
+    char choice;
+    printf("please enter your choice:");
+    fflush(stdin);
+    choice = getch();
+    return choice;
+}
+
