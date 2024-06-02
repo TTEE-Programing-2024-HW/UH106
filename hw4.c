@@ -126,93 +126,93 @@ void inputData() { // Check if maximum number of students is reached
     }
 
     int i; // Loop counter for students
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) {  // Loop to enter data for each student
         printf("please enter student%d name: ", i + 1);
-        fflush(stdin);
+        fflush(stdin); // Clear input buffer
         scanf("%s", student[studentCount].name);
 
         printf("please enter student ID: ");
-        while (scanf("%d", &student[studentCount].id) != 1 || student[studentCount].id < 100000 || student[studentCount].id > 999999) {
+        while (scanf("%d", &student[studentCount].id) != 1 || student[studentCount].id < 100000 || student[studentCount].id > 999999) { // Validate ID
             printf("invalid ID. please enter again:\n");
-            while (getchar()!= '\n');
+            while (getchar()!= '\n'); // Clear input buffer
         }
         
         printf("please enter math score: ");
-        while (scanf("%d", &student[studentCount].math) != 1 || student[studentCount].math < 0 || student[studentCount].math > 100) {
+        while (scanf("%d", &student[studentCount].math) != 1 || student[studentCount].math < 0 || student[studentCount].math > 100) {  // Validate score
             printf("invalid score. please enter again:\n");
-            while (getchar()!= '\n');
+            while (getchar()!= '\n');  // Clear input buffer
         }
 
         printf("please enter physics score: ");
-        while (scanf("%d", &student[studentCount].physics) != 1 || student[studentCount].physics < 0 || student[studentCount].physics > 100) {
+        while (scanf("%d", &student[studentCount].physics) != 1 || student[studentCount].physics < 0 || student[studentCount].physics > 100) { // Validate score
             printf("invalid score. please enter again:\n");
-            while (getchar()!= '\n');
+            while (getchar()!= '\n'); // Clear input buffer
         }
 
         printf("please enter english score: ");
-        while (scanf("%d", &student[studentCount].english) != 1 || student[studentCount].english < 0 || student[studentCount].english > 100) {
+        while (scanf("%d", &student[studentCount].english) != 1 || student[studentCount].english < 0 || student[studentCount].english > 100) { // Validate score
             printf("invalid score. please enter again:\n");
-            while (getchar()!= '\n');
+            while (getchar()!= '\n'); // Clear input buffer
         }
         
-        student[studentCount].average = (student[studentCount].math + student[studentCount].physics + student[studentCount].english) / 3.0;
-        studentCount++;
+        student[studentCount].average = (student[studentCount].math + student[studentCount].physics + student[studentCount].english) / 3.0;  // Calculate average score
+        studentCount++; // Increment student count
     }
 
     printf("press any key to continue...\n");
-    getch();
-    clear_screen();
+    getch(); // Wait for user input
+    clear_screen(); // Clear screen
 }
 
 void displayData() {
-	int i;
-    for (i = 0; i < studentCount; i++) {
-        printf("name: %s\n", student[i].name);
-        printf("ID: %d\n", student[i].id);
-        printf("math: %d\n", student[i].math);
-        printf("physics: %d\n", student[i].physics);
-        printf("english: %d\n", student[i].english);
-        printf("average: %.2f\n", student[i].average);
+	int i; // Loop counter for students
+    for (i = 0; i < studentCount; i++) {// Loop through all students
+        printf("name: %s\n", student[i].name); // Display student name
+        printf("ID: %d\n", student[i].id); // Display student ID
+        printf("math: %d\n", student[i].math);  // Display math score
+        printf("physics: %d\n", student[i].physics); // Display physics score
+        printf("english: %d\n", student[i].english); // Display English score
+        printf("average: %.2f\n", student[i].average);// Display average score
     }
 
     printf("press any key to continue...\n");
-    getch();
-    clear_screen();
+    getch(); // Wait for user input
+    clear_screen(); // Wait for user input
 }
 
 void searchGrade() {
-    char searchName[30];
+    char searchName[30]; // Buffer to store name to search
     printf("please enter student name: ");
-    fflush(stdin);
-    scanf("%s", searchName);
+    fflush(stdin); // Clear input buffer
+    scanf("%s", searchName); // Get student name
     
-    int i;
-    for (i = 0; i <= studentCount; i++) {
-        if (strcmp(student[i].name, searchName) == 0) {
-            printf("name: %s\n", student[i].name);
-            printf("ID: %d\n", student[i].id);
-            printf("math: %d\n", student[i].math);
-            printf("physics: %d\n", student[i].physics);
-            printf("english: %d\n", student[i].english); 
-            printf("average: %.2f\n", student[i].average);
+    int i; // Loop counter for students
+    for (i = 0; i <= studentCount; i++) { // Loop through all students
+        if (strcmp(student[i].name, searchName) == 0) { // Check if name matches
+            printf("name: %s\n", student[i].name); // Display student name
+            printf("ID: %d\n", student[i].id); // Display student ID
+            printf("math: %d\n", student[i].math); // Display math score
+            printf("physics: %d\n", student[i].physics); // Display physics score
+            printf("english: %d\n", student[i].english); // Display English score
+            printf("average: %.2f\n", student[i].average); // Display average score
             break;
         }
 
-        if (i == studentCount) { 
-            printf("student not found\n"); 
-            break;
+        if (i == studentCount) { // If student not found
+            printf("student not found\n"); // Inform user
+            break; // Exit loop
         }
     }
 
     printf("press any key to continue...\n");
-    getch();
-    clear_screen();
+    getch(); // Wait for user input
+    clear_screen(); // Clear screen
 }
 
 void sort_student() {
-	int i;
-	int j;
-    for (i = 0; i < studentCount - 1; i++) { 
+	int i; // Loop counter for outer loop
+	int j; // Loop counter for inner loop
+    for (i = 0; i < studentCount - 1; i++) {  // Outer loop for bubble sort
         for (j = i + 1; j < studentCount; j++) { 
             if (student[j].average > student[i].average) {
                 Student temp = student[i]; 
