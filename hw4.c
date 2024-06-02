@@ -123,7 +123,8 @@ void inputData() { //check
         while (getchar()!= '\n');
     }
 
-    for (int i = 0; i < n; i++) {
+    int i;
+    for (i = 0; i < n; i++) {
         printf("please enter student%d name: ", i + 1);
         fflush(stdin);
         scanf("%s", student[studentCount].name);
