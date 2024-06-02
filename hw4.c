@@ -203,3 +203,31 @@ void searchGrade() {
     getch();
     clear_screen();
 }
+void sort_student() {
+    for (int i = 0; i < studentCount - 1; i++) {
+        for (int j = i + 1; j < studentCount; j++) {
+            if (student[j].average > student[i].average) {
+                Student temp = student[i];
+                student[i] = student[j];
+                student[j] = temp;
+            }
+        }
+    }
+}
+
+void gradeRanking() {
+    sort_student();
+    for (int i = 0; i < studentCount; i++) {
+        printf("name: %s\n", student[i].name);
+        printf("ID: %d\n", student[i].id);
+        printf("math: %d\n", student[i].math);
+        printf("physics: %d\n", student[i].physics);
+        printf("english: %d\n", student[i].english);
+        printf("average: %.2f\n", student[i].average);
+        printf("\n");
+    }
+
+    printf("press any key to continue...\n");
+    getch();
+    clear_screen();
+}
