@@ -209,8 +209,9 @@ void searchGrade() {
 
 void sort_student() {
 	int i;
+	int j;
     for (i = 0; i < studentCount - 1; i++) {
-        for (int j = i + 1; j < studentCount; j++) {
+        for (j = i + 1; j < studentCount; j++) {
             if (student[j].average > student[i].average) {
                 Student temp = student[i];
                 student[i] = student[j];
