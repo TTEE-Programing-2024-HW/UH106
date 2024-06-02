@@ -213,9 +213,9 @@ void sort_student() {
 	int i; // Loop counter for outer loop
 	int j; // Loop counter for inner loop
     for (i = 0; i < studentCount - 1; i++) {  // Outer loop for bubble sort
-        for (j = i + 1; j < studentCount; j++) { 
-            if (student[j].average > student[i].average) {
-                Student temp = student[i]; 
+        for (j = i + 1; j < studentCount; j++) { // Inner loop for bubble sort
+            if (student[j].average > student[i].average) { // Compare average scores
+                Student temp = student[i]; // Swap students
                 student[i] = student[j];
                 student[j] = temp;
             } 
@@ -224,78 +224,78 @@ void sort_student() {
 }
 
 void gradeRanking() { 
-    sort_student(); 
+    sort_student(); // Sort students by average score
     
-    int i;
-    for (i = 0; i < studentCount; i++) { 
-        printf("name: %s\n", student[i].name);
-        printf("ID: %d\n", student[i].id); 
-        printf("math: %d\n", student[i].math);
-        printf("physics: %d\n", student[i].physics);
-        printf("english: %d\n", student[i].english);
-        printf("average: %.2f\n", student[i].average);
-        printf("\n");
+    int i; // Loop counter for students
+    for (i = 0; i < studentCount; i++) { // Loop through all students
+        printf("name: %s\n", student[i].name); // Display student name
+        printf("ID: %d\n", student[i].id);  // Display student ID
+        printf("math: %d\n", student[i].math); // Display math score
+        printf("physics: %d\n", student[i].physics); // Display physics score
+        printf("english: %d\n", student[i].english); // Display English score
+        printf("average: %.2f\n", student[i].average); // Display average score
+        printf("\n"); // New line for separation
     }
 
     printf("press any key to continue...\n");
-    getch();
-    clear_screen();
+    getch(); // Wait for user input
+    clear_screen(); // Clear screen
 }
 
 char getInput() {
-    char choice;
-    printf("please enter your choice:");
-    fflush(stdin);
-    choice = getch();
-    return choice;
+    char choice; // Variable to store user choice
+    printf("please enter your choice:"); 
+    fflush(stdin); // Clear input buffer
+    choice = getch(); // Get user input without echoing it to the console
+    return choice; // Return user input
 }
 
 int main() {
-    char choice;
-    if (!checkPassword()) {
-        return 0;
+    char choice; // Variable to store user menu choice
+    if (!checkPassword()) { // Check if the password is correct
+        return 0; // Exit program if password is incorrect
     }
 
-    while (true) {
-        clear_screen();
-        mainMenu();
-        choice = getInput();
-        clear_screen();
+    while (true) { // Infinite loop for the main menu
+        clear_screen(); // Clear the screen
+        mainMenu(); // Display the main menu
+        choice = getInput(); // Get user choice
+        clear_screen(); // Clear the screen
 
-        switch (choice) {
-            case 'A':
+        switch (choice) { // Handle user choice
+            case 'A': // Fallthrough to handle both 'A' and 'a'
             case 'a':
-                inputData();
+                inputData(); // Call function to input data
                 break;
-            case 'B':
+            case 'B': // Fallthrough to handle both 'B' and 'b'
             case 'b':
-                displayData();
+                displayData(); // Call function to display data
                 break;
-            case 'C':
+            case 'C': // Fallthrough to handle both 'C' and 'c'
             case 'c':
-                searchGrade();
+                searchGrade();// Call function to search for a grade
                 break;
-            case 'D':
+            case 'D': // Fallthrough to handle both 'D' and 'd'
             case 'd':
-                gradeRanking();
+                gradeRanking(); // Call function to display grade ranking
                 break;
-            case 'E':
+            case 'E': // Fallthrough to handle both 'E' and 'e'
             case 'e':
                 do {
                     printf ("are you sure you want to exit? (y/n)\n");
-                    choice = getInput();
-                    choice = tolower(choice);
-                    if (choice == 'y') {
+                    choice = getInput(); // Get user input
+                    choice = tolower(choice); // Convert input to lowercase
+                    if (choice == 'y') { // If user confirms exit
                         printf("exiting...\n");
-                        return 0;
-                    } else if (choice == 'n') {
+                        return 0; // Exit program
+                    } else if (choice == 'n') { // If user cancels exit
                         printf("\n");
-                        break;
-                    } else {
-                        clear_screen();
+                        break; // Break out of confirmation loop
+                    } else { // If user input is invalid
+                        clear_screen(); // Clear the screen
                         printf("invalid input\n");
                     } 
-                } while (choice == 'y' || choice == 'n');
+                } while (choice == 'y' || choice == 'n'); // Loop until valid input
                 break;
             default:
                 printf("invalid input\n");
