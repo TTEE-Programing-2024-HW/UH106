@@ -183,8 +183,9 @@ void searchGrade() {
     printf("please enter student name: ");
     fflush(stdin);
     scanf("%s", searchName);
-
-    for (int i = 0; i <= studentCount; i++) {
+    
+    int i;
+    for (i = 0; i <= studentCount; i++) {
         if (strcmp(student[i].name, searchName) == 0) {
             printf("name: %s\n", student[i].name);
             printf("ID: %d\n", student[i].id);
