@@ -223,7 +223,9 @@ void sort_student() {
 
 void gradeRanking() {
     sort_student();
-    for (int i = 0; i < studentCount; i++) {
+    
+    int i;
+    for (i = 0; i < studentCount; i++) {
         printf("name: %s\n", student[i].name);
         printf("ID: %d\n", student[i].id);
         printf("math: %d\n", student[i].math);
