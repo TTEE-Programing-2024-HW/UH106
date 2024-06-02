@@ -10,31 +10,33 @@
 #define MAX_STUDENT 10 // Maximum number of students
 #define MIN_STUDENT 2 // Minimum number of students
 
-void clear_screen();
-bool checkPassword();
-void mainMenu();
-void personalScreen();
-void inputData();
-void displayData();
-void searchGrade();
-void sort_student();
-void gradeRanking();
-char getInput();
+void clear_screen();// Declaration of function to clear screen
+bool checkPassword();// Declaration of function to check password
+void mainMenu();// Declaration of function to display main menu
+void personalScreen();// Declaration of function to display personal screen
+void inputData();// Declaration of function to input student data
+void displayData();// Declaration of function to display student data
+void searchGrade();// Declaration of function to search for a student's grade by name
+void sort_student();// Declaration of function to sort students by their average grades
+void gradeRanking();// Declaration of function to display the grade ranking
+char getInput();// Declaration of function to get user input
 
+// Structure definition for Student
 typedef struct {
-    char name[30];
-    int id;
-    int math;
-    int physics;
-    int english;
-    float average;
+    char name[30];// Student's name
+    int id;// Student's ID
+    int math;// Math score
+    int physics;// Physics score
+    int english; // English score
+    float average; // Average score
 } Student;
 
-Student student[MAX_STUDENT];
-int studentCount = 0;
+Student student[MAX_STUDENT];// Array to store student information
+int studentCount = 0;// Counter for number of students
 
+// Function to clear the screen (specific to Windows)
 void clear_screen() {
-    system("cls");
+    system("cls");// Clear the console screen using system command
 }
 
 void personalScreen() {
@@ -73,15 +75,15 @@ void personalScreen() {
 
 bool checkPassword() {
     char password[] = "2024";
-    char inputPasword[5];
-    int passwordAttempts;
-    int waitTime = 3;
+    char inputPasword[5]; // Buffer to store user input password
+    int passwordAttempts; // Variable to keep track of password attempts
+    int waitTime = 3; // Wait time in seconds between attempts
     
-    int i;
-    int j;
-    for (i = 0; i < 3; i++) {
-        clear_screen();
-        personalScreen();
+    int i; // Loop counter for password attempts
+    int j; // Loop counter for wait time
+    for (i = 0; i < 3; i++) { // Allow up to 3 attempts
+        clear_screen(); // Clear the screen
+        personalScreen(); // Display personal screen
         printf("please enter password(2024):");
         fgets(inputPasword, sizeof(inputPasword), stdin);
 
@@ -191,13 +193,13 @@ void searchGrade() {
             printf("ID: %d\n", student[i].id);
             printf("math: %d\n", student[i].math);
             printf("physics: %d\n", student[i].physics);
-            printf("english: %d\n", student[i].english);
+            printf("english: %d\n", student[i].english); 
             printf("average: %.2f\n", student[i].average);
             break;
         }
 
-        if (i == studentCount) {
-            printf("student not found\n");
+        if (i == studentCount) { 
+            printf("student not found\n"); 
             break;
         }
     }
@@ -210,24 +212,24 @@ void searchGrade() {
 void sort_student() {
 	int i;
 	int j;
-    for (i = 0; i < studentCount - 1; i++) {
-        for (j = i + 1; j < studentCount; j++) {
+    for (i = 0; i < studentCount - 1; i++) { 
+        for (j = i + 1; j < studentCount; j++) { 
             if (student[j].average > student[i].average) {
-                Student temp = student[i];
+                Student temp = student[i]; 
                 student[i] = student[j];
                 student[j] = temp;
-            }
+            } 
         }
     }
 }
 
-void gradeRanking() {
-    sort_student();
+void gradeRanking() { 
+    sort_student(); 
     
     int i;
-    for (i = 0; i < studentCount; i++) {
+    for (i = 0; i < studentCount; i++) { 
         printf("name: %s\n", student[i].name);
-        printf("ID: %d\n", student[i].id);
+        printf("ID: %d\n", student[i].id); 
         printf("math: %d\n", student[i].math);
         printf("physics: %d\n", student[i].physics);
         printf("english: %d\n", student[i].english);
